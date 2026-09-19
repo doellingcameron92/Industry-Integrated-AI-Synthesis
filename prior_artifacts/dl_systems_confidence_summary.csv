@@ -1,0 +1,4 @@
+,Baseline CNN,Regularized CNN
+mean confidence when correct,0.9653836488723755,0.9544008374214172
+mean confidence when wrong,0.7490595579147339,0.7103309631347656
+share of errors with confidence > 0.9,0.2609223300970874,0.1955958549222798

@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 145
+target-version = "py310"
+extend-exclude = [".venv", "prior_artifacts", "*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"build_notebook.py" = ["E501"]
+"presentation/build_slides.py" = ["E501"]
+"evaluation/run_evaluation.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

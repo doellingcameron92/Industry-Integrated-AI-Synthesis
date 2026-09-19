@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2026-09-19T20:53:50.059037+00:00",
+    "task": "Should Nigeria prioritise water and sanitation or double health spending? Save the brief.",
+    "answer": "For Nigeria (observed life expectancy 54.1y, model baseline 64.4y) the simulated options rank: A: Infrastructure & services package: +3.0y (to 67.4y); B: Double health spending per capita: +0.0y (to 64.4y). The largest modelled gain is A: Infrastructure & services package at +3.0 years.",
+    "iso3": "NGA"
+  },
+  {
+    "timestamp": "2026-09-19T20:53:50.142852+00:00",
+    "task": "Compare options for Cambodia and save a brief",
+    "answer": "For Cambodia (observed life expectancy 70.5y, model baseline 70.4y) the simulated options rank: A: Water, sanitation & electricity: +0.8y (to 71.2y); B: Double health spending per capita: +0.0y (to 70.4y). The largest modelled gain is A: Water, sanitation & electricity at +0.8 years.",
+    "iso3": "KHM"
+  },
+  {
+    "timestamp": "2026-09-19T20:53:50.148599+00:00",
+    "task": "Advise on Atlantis",
+    "answer": "I could not identify a country in the request. Please name a country covered by the World Bank indicators (for example 'Nigeria' or 'NGA').",
+    "iso3": null
+  }
+]

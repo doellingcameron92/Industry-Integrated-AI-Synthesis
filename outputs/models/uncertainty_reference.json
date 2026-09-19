@@ -1,0 +1,12 @@
+{
+  "median": 4.225024223327637,
+  "p75": 4.562016487121582,
+  "p90": 4.869446754455566,
+  "corr_std_vs_abs_error": -0.013756021596397537,
+  "mae_low_spread_half": 2.9288418292999268,
+  "mae_high_spread_half": 2.8817458152770996,
+  "corr_disagreement_vs_gbr_error": 0.23350723517350067,
+  "gbr_mae_when_models_agree": 2.6538717387002846,
+  "gbr_mae_when_models_disagree": 3.599705281827746,
+  "share_disagree": 0.3221343873517787
+}

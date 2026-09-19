@@ -1,0 +1,37 @@
+{
+  "model": "GradientBoostingRegressor(n_estimators=500, lr=0.05, depth=3, subsample=0.8)",
+  "training_data": "World Bank WDI 2000-2022, 217 countries",
+  "validation": "5-fold country-grouped CV + 20% country-grouped hold-out",
+  "grouped_cv": {
+    "r2": 0.857,
+    "mae": 2.427
+  },
+  "hold_out": {
+    "r2": 0.82,
+    "mae": 2.959,
+    "rmse": 3.893,
+    "n_train_countries": 173,
+    "n_test_countries": 44
+  },
+  "top_features": {
+    "basic_sanitation_pct": 0.137,
+    "fertility_rate": 0.07,
+    "log_gdp_per_capita": 0.044,
+    "electricity_access_pct": 0.037,
+    "region": 0.037,
+    "suicide_rate": 0.029,
+    "basic_water_pct": 0.029,
+    "internet_users_pct": 0.019
+  },
+  "known_hard_cases": [
+    "CAF",
+    "GNQ",
+    "LSO",
+    "NGA",
+    "NRU",
+    "PLW",
+    "SWZ",
+    "TCD",
+    "ZAF"
+  ]
+}
