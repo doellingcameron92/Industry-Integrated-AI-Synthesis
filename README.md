@@ -17,7 +17,7 @@ The artifact is a new, integrated system that combines four prior capstone proje
 | Evaluation (11 realistic scenarios incl. failure cases) | [`evaluation/scenarios.json`](evaluation/scenarios.json), [`evaluation/results.md`](evaluation/results.md), `evaluation/run_evaluation.py` |
 | Automated tests (13) | [`tests/test_policy_advisor.py`](tests/test_policy_advisor.py) |
 | Reflective synthesis paper (1,894 words + references, APA) | [`Reflective_Synthesis_Paper.pdf`](Reflective_Synthesis_Paper.pdf) (source `paper/Reflective_Synthesis_Paper.md`) |
-| 15-minute mentor presentation | [`presentation/Mentor_Presentation.pptx`](presentation/Mentor_Presentation.pptx) (13 slides, notes embedded) |
+| 15-minute mentor presentation | [`presentation/Mentor_Presentation.pptx`](presentation/Mentor_Presentation.pptx) (11 presented slides following the seven required sections + 4 appendix slides for the Q&A; 15:00 time budget; notes embedded) |
 | Speaker notes / defense prep | [`presentation/Speaker_Notes.md`](presentation/Speaker_Notes.md), [`presentation/Defense_QA.md`](presentation/Defense_QA.md) |
 | Prior-project artifacts referenced | [`prior_artifacts/`](prior_artifacts) |
 | System prompt / operating rules | [`prompts/system_prompt.md`](prompts/system_prompt.md) |
