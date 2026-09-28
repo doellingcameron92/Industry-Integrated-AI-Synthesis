@@ -16,6 +16,8 @@ The artifact is a new, integrated system that combines four prior capstone proje
 | Architecture / workflow diagrams | [`diagrams/architecture.png`](diagrams/architecture.png), [`diagrams/workflow.png`](diagrams/workflow.png) (`diagrams/make_diagrams.py`) |
 | Evaluation (11 realistic scenarios incl. failure cases) | [`evaluation/scenarios.json`](evaluation/scenarios.json), [`evaluation/results.md`](evaluation/results.md), `evaluation/run_evaluation.py` |
 | Automated tests (13) | [`tests/test_policy_advisor.py`](tests/test_policy_advisor.py) |
+| Resume blinding service (code) | [`resume_blinder/`](resume_blinder) — `parse.py`, `generalize.py`, `render.py`, `audit.py`, `service.py` |
+| Resume blinding evaluation (13 scenarios) + tests | [`evaluation/resume_scenarios.json`](evaluation/resume_scenarios.json), [`evaluation/resume_results.md`](evaluation/resume_results.md), [`tests/test_resume_blinder.py`](tests/test_resume_blinder.py) |
 | Reflective synthesis paper (1,894 words + references, APA) | [`Reflective_Synthesis_Paper.pdf`](Reflective_Synthesis_Paper.pdf) (source `paper/Reflective_Synthesis_Paper.md`) |
 | 15-minute mentor presentation | [`presentation/Mentor_Presentation.pptx`](presentation/Mentor_Presentation.pptx) (13 slides, notes embedded) |
 | Speaker notes / defense prep | [`presentation/Speaker_Notes.md`](presentation/Speaker_Notes.md), [`presentation/Defense_QA.md`](presentation/Defense_QA.md) |
@@ -78,6 +80,54 @@ print(agent.run("Should Nigeria prioritise water and sanitation or double health
 - Tool output (including analyst notes) is untrusted data; injected instructions are flagged and ignored.
 - Nothing is written to disk without human approval; every run leaves a JSONL trace in `logs/`.
 - Known limits: national/annual data, independent levers, no cost model, heuristic confidence, regex guardrails, narrow offline planner.
+
+## Resume blinding service (`resume_blinder/`)
+
+Rewrites a PDF/DOCX/text resume into a standardized, blinded resume draft that the candidate must approve before it is saved or shared. It reuses the policy advisor's guardrail patterns: Pydantic contracts, a pluggable LLM/deterministic component selected by `OPENAI_API_KEY`, regex scope guardrails, untrusted-input scanning, a grounding audit, an approval callback and JSONL traces.
+
+```
+parse.py       pypdf / python-docx -> text -> ResumeProfile (roles, employers, date ranges, skills, certifications,
+               education, achievements); every field carries SourceSpan offsets into the original text.
+               OpenAIExtractor if OPENAI_API_KEY is set (it only picks verbatim substrings; spans are located in code,
+               identity fields and injected lines are masked before the call), otherwise HeuristicExtractor.
+generalize.py  employer -> industry + org-size band; school -> degree + field + institution tier; location -> region;
+               date ranges -> durations; gaps >= 6 months -> neutral "Career break" entries; gendered titles neutralized.
+               Names, pronouns, photos, contact details, addresses, links, demographic fields, summaries and
+               personal/interest sections are never emitted. GeneralizationConfig(granularity="coarse"|"standard"|"fine").
+render.py      one skills-first template (Skills, Experience, Education, Certifications, Achievements) -> Markdown -> PDF
+               (reportlab) / DOCX (python-docx). Removed content leaves no [REDACTED] placeholder.
+audit.py       grounding: every output line must cite valid spans that are not identity/injection spans, and its words and
+               numbers must come from those spans or the fixed generalization vocabulary; otherwise it is dropped and
+               flagged, lowering confidence. Leakage: a token list built from the original resume's identifiers,
+               organization/school/location names and protected-attribute terms; matching lines are dropped and the
+               rendered document must have zero matches.
+service.py     scope check -> parse -> generalize -> audit -> render draft -> approval -> save. One JSONL trace per run
+               in logs/resume_blinder/<run_id>.jsonl (counts, offsets and categories only, never resume text).
+```
+
+```bash
+python -m resume_blinder.service path/to/resume.pdf --granularity standard   # interactive candidate approval
+python -m evaluation.run_resume_evaluation                                  # -> evaluation/resume_results.{json,md}
+pytest -q tests/test_resume_blinder.py
+```
+
+```python
+from resume_blinder import ApprovalDecision, BlindingRequest, ResumeBlinderService
+
+service = ResumeBlinderService()
+draft = service.run(BlindingRequest(source_path="cv.docx"))           # status "pending_approval"; nothing saved
+print(draft.draft.markdown, draft.draft.audit.confidence)
+final = service.finalize(draft, ApprovalDecision(approved=True, reviewer="candidate"))  # writes md/pdf/docx
+```
+
+### Resume blinding: boundaries and responsible use
+
+- **Blinding reduces but does not eliminate bias.** Proxies survive generalization: skills, languages, industry, institution tier, career-break length, writing style and the content of achievements can still correlate with protected characteristics. Treat blinded resumes as one mitigation inside a broader fair-hiring process, not as evidence that a process is unbiased.
+- **Downstream screening is still regulated.** Any use of blinded resumes in screening, scoring or selection (by people or software) remains subject to EEOC guidance and Title VII / ADEA / ADA disparate-impact analysis, and automated screening may be an automated employment decision tool under NYC Local Law 144 (bias audits, candidate notice) and similar AEDT rules. This package is not a bias audit and does not make a downstream tool compliant.
+- **Out of scope, refused:** inferring or estimating demographic/protected attributes, ranking/scoring/comparing candidates and hiring or interview recommendations. The service only rewrites one resume for that candidate's review.
+- **Candidate control:** output is a draft. Only an explicit approval (`finalize` or an approval callback) writes documents; denied or blocked drafts write nothing. Drafts that fail the leakage audit or fall below `min_confidence` are blocked before approval is requested.
+- **Resume text is untrusted data:** lines that address an AI/ATS or ask for ranking or hiring are flagged, excluded and logged as `prompt_injection_detected`; they lower confidence.
+- **Known limits:** deterministic parsing assumes conventional section headings; the employer/institution taxonomy in `reference.json` is small (unknown employers fall back to keyword industries without a size band); lexicon-based detection of names and protected attributes will miss some cases and may over-remove others (e.g. clauses mentioning pronouns); durations depend on the `as_of` date for open-ended roles. Candidates should review every draft.
 
 ## Data
 

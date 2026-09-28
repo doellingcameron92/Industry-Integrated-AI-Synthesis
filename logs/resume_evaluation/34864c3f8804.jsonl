@@ -1,0 +1,9 @@
+{"ts": "2026-09-28T14:27:23.070911+00:00", "run_id": "34864c3f8804", "step": 1, "kind": "run_start", "source_format": "txt", "granularity": "standard", "extractor": "HeuristicExtractor", "rewriter": "PassthroughRewriter", "output_formats": ["md", "pdf", "docx"]}
+{"ts": "2026-09-28T14:27:23.071859+00:00", "run_id": "34864c3f8804", "step": 2, "kind": "parse", "extractor": "HeuristicExtractor", "chars": 1210, "roles": 2, "education": 2, "skills": 8, "certifications": 1, "achievements": 1, "parse_coverage": 1.0, "photos": 0, "latency_ms": 0.9}
+{"ts": "2026-09-28T14:27:23.071902+00:00", "run_id": "34864c3f8804", "step": 3, "kind": "guardrail", "reason": "prompt_injection_detected", "source": "resume_text", "span": [585, 688], "action": "excluded_from_profile"}
+{"ts": "2026-09-28T14:27:23.074798+00:00", "run_id": "34864c3f8804", "step": 4, "kind": "generalize", "removed": {"address": 1, "demographic_field": 1, "email": 1, "injected_instruction": 1, "link": 1, "name": 1, "phone": 1, "pronouns": 1}, "lines": 20, "latency_ms": 2.9}
+{"ts": "2026-09-28T14:27:23.082293+00:00", "run_id": "34864c3f8804", "step": 5, "kind": "audit", "total_lines": 20, "grounded_lines": 20, "grounding_rate": 1.0, "ungrounded": [], "leakage_dropped": [], "leakage_tokens_checked": 40, "document_leaks": [], "placeholder_artifacts": 0, "confidence": 0.9, "passed": true}
+{"ts": "2026-09-28T14:27:23.082393+00:00", "run_id": "34864c3f8804", "step": 6, "kind": "approval_requested", "confidence": 0.9}
+{"ts": "2026-09-28T14:27:23.082425+00:00", "run_id": "34864c3f8804", "step": 7, "kind": "approval_decision", "approved": true, "reviewer": "auto_approve (tests/evaluation only)"}
+{"ts": "2026-09-28T14:27:23.115038+00:00", "run_id": "34864c3f8804", "step": 8, "kind": "saved", "formats": ["docx", "md", "pdf"]}
+{"ts": "2026-09-28T14:27:23.115104+00:00", "run_id": "34864c3f8804", "step": 9, "kind": "run_end", "status": "approved"}

@@ -1,0 +1,41 @@
+Jordan Avery Whitfield (she/her)
+Senior Data Analyst
+42 Maple Grove Road, Cambridge, MA 02139 | jordan.whitfield@example.com | (617) 555-0142 | linkedin.com/in/jordanwhitfield
+
+PROFESSIONAL SUMMARY
+Detail-oriented analyst and proud mother of two with eight years of experience turning messy healthcare data into decisions.
+
+SKILLS
+Languages: Python, SQL, R
+Tools: Tableau, dbt, Airflow, Git
+Spanish (native speaker)
+
+EXPERIENCE
+Senior Data Analyst | Northwind Health Partners | Boston, MA | Mar 2021 – Present
+- Built a readmission-risk dashboard used by 40 care managers, cutting manual chart review time by 30%.
+- Led migration of 120 reporting jobs from legacy SQL Server to dbt and Airflow.
+- Co-chaired the Northwind Health Partners Women in Data employee resource group.
+- Mentored 3 junior analysts; she also ran the monthly analytics office hours.
+- Won the 2020 Northwind hackathon with a bed-capacity forecasting model.
+
+Data Analyst
+Contoso Analytics, Seattle, WA
+Jun 2016 – Aug 2019
+- Automated weekly revenue reporting for 15 retail clients using Python and SQL.
+- Presented churn findings at the Lakeside State University data summit in 2018.
+
+EDUCATION
+Master of Science in Computer Science, Lakeside State University, 2016
+B.A., Economics — Harbor City College, 2014
+- Dean's list; member of the Society of Women Engineers
+
+CERTIFICATIONS
+- Tableau Desktop Specialist, 2020
+- AWS Certified Cloud Practitioner (Amazon Web Services), 2022
+
+AWARDS
+- Contoso Analytics Rising Star Award (2018)
+- Northwind Health Partners Innovation Prize for the readmission dashboard, 2022
+
+INTERESTS
+Church choir, marathon running, volunteering with my kids' school
