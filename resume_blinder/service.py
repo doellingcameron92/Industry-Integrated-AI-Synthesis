@@ -9,6 +9,7 @@ resume text, so the log itself does not become a store of candidate PII.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import time
@@ -243,8 +244,6 @@ class ResumeBlinderService:
 
 
 def main() -> None:
-    import argparse
-
     parser = argparse.ArgumentParser(description="Rewrite a resume into a standardized blinded draft for candidate approval.")
     parser.add_argument("resume", help="PDF, DOCX or text resume")
     parser.add_argument("--granularity", choices=["coarse", "standard", "fine"], default="standard")
